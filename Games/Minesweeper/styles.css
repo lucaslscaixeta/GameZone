@@ -95,3 +95,7 @@ h1{
     left: 53%;
     transform: translate(-90%, -53%);
 }
+
+#restart-button {
+    display: none;
+}
