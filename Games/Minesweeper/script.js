@@ -162,3 +162,11 @@ function checkTile(r, c) {
     }
     return 0;
 }
+
+function resetGame() {
+    board = [];
+    minesLocation = [];
+    tilesClicked = 0;
+    flagEnabled = false;
+    gameOver = false;
+}
