@@ -29,6 +29,7 @@ function setMines() {
 function startGame() {
     document.getElementById("mines-count").innerText = minesCount;
     document.getElementById("flag-button").addEventListener("click", setFlag);
+    document.getElementById("restart-button").addEventListener("click", resetGame);
 
     initializeBoard();
 }
@@ -175,4 +176,10 @@ function resetGame() {
     tilesClicked = 0;
     flagEnabled = false;
     gameOver = false;
+
+    document.getElementById("board").innerHTML = "";
+    document.getElementById("flag-button").style.backgroundColor = "lightgray";
+    document.getElementById("mines-count").innerText = minesCount;
+
+    startGame();
 }
