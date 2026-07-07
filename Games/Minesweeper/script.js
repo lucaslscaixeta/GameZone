@@ -103,6 +103,10 @@ function revealMines() {
             }
         }
     }
+    
+    const restartButton = document.getElementById("restart-button");
+    restartButton.innerText = "Restart";
+    restartButton.style.display = "block";
 }
 
 function checkMine(r, c) {
@@ -155,6 +159,10 @@ function checkMine(r, c) {
     if (tilesClicked == rows * columns - minesCount) {
         document.getElementById("mines-count").innerText = "Cleared";
         gameOver = true;
+
+        const restartButton = document.getElementById("restart-button");
+        restartButton.innerText = "AGAIN";
+        restartButton.style.display = "block";
     }
 
 }
@@ -180,6 +188,7 @@ function resetGame() {
     document.getElementById("board").innerHTML = "";
     document.getElementById("flag-button").style.backgroundColor = "lightgray";
     document.getElementById("mines-count").innerText = minesCount;
+    document.getElementById("restart-button").style.display = "none";
 
     startGame();
 }
