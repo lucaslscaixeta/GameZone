@@ -1,11 +1,14 @@
-var board = [];
-var rows = 8;
-var columns = 8;
-var minesCount = 10;
-var minesLocation = []; 
-var tilesClicked = 0; 
-var flagEnabled = false;
-var gameOver = false;
+const rows = 8;
+const columns = 8;
+const minesCount = 10;
+
+const gameState = {
+    board: [],
+    minesLocation: [],
+    tilesClicked: 0,
+    flagEnabled: false,
+    gameOver: false
+};
 
 window.onload = function() {
     registerEventListeners();
@@ -25,8 +28,8 @@ function setMines() {
         let c = Math.floor(Math.random() * columns);
         let id = r.toString() + "-" + c.toString();
 
-        if (!minesLocation.includes(id)) {
-            minesLocation.push(id);
+        if (!gameState.minesLocation.includes(id)) {
+            gameState.minesLocation.push(id);
             minesLeft -= 1;
         }
     }
@@ -34,7 +37,6 @@ function setMines() {
 
 function startGame() {
     initializeUI();
-    registerEventListeners();
     initializeBoard();
 }
 
@@ -65,28 +67,28 @@ function createBoardTiles() {
             row.push(tile);
         }
 
-        board.push(row);
+        gameState.board.push(row);
     }
 }
 
 function setFlag() {
-    if (flagEnabled) {
-        flagEnabled = false;
+    if (gameState.flagEnabled) {
+        gameState.flagEnabled = false;
         getElement("flag-button").style.backgroundColor = "lightgray";
     }
     else {
-        flagEnabled = true;
+        gameState.flagEnabled = true;
         getElement("flag-button").style.backgroundColor = "darkgray";
     }
 }
 
 function clickTile() {
-    if (gameOver || this.classList.contains("tile-clicked")) {
+    if (gameState.gameOver || this.classList.contains("tile-clicked")) {
         return;
     }
 
     let tile = this;
-    if (flagEnabled) {
+    if (gameState.flagEnabled) {
         if (tile.innerText == "") {
             tile.innerText = "🚩";
         }
@@ -96,9 +98,9 @@ function clickTile() {
         return;
     }
 
-    if (minesLocation.includes(tile.id)) {
+    if (gameState.minesLocation.includes(tile.id)) {
         // alert("GAME OVER");
-        gameOver = true;
+        gameState.gameOver = true;
         revealMines();
         return;
     }
@@ -114,8 +116,8 @@ function clickTile() {
 function revealMines() {
     for (let r= 0; r < rows; r++) {
         for (let c = 0; c < columns; c++) {
-            let tile = board[r][c];
-            if (minesLocation.includes(tile.id)) {
+            let tile = gameState.board[r][c];
+            if (gameState.minesLocation.includes(tile.id)) {
                 tile.innerText = "💣";
                 tile.style.backgroundColor = "red";                
             }
@@ -131,12 +133,12 @@ function checkMine(r, c) {
     if (r < 0 || r >= rows || c < 0 || c >= columns) {
         return;
     }
-    if (board[r][c].classList.contains("tile-clicked")) {
+    if (gameState.board[r][c].classList.contains("tile-clicked")) {
         return;
     }
 
-    board[r][c].classList.add("tile-clicked");
-    tilesClicked += 1;
+    gameState.board[r][c].classList.add("tile-clicked");
+    gameState.tilesClicked += 1;
 
     let minesFound = 0;
 
@@ -155,8 +157,8 @@ function checkMine(r, c) {
     minesFound += checkTile(r+1, c+1);      
 
     if (minesFound > 0) {
-        board[r][c].innerText = minesFound;
-        board[r][c].classList.add("x" + minesFound.toString());
+        gameState.board[r][c].innerText = minesFound;
+        gameState.board[r][c].classList.add("x" + minesFound.toString());
     }
     else {
         
@@ -174,9 +176,9 @@ function checkMine(r, c) {
         checkMine(r+1, c+1);    
     }
 
-    if (tilesClicked == rows * columns - minesCount) {
+    if (gameState.tilesClicked == rows * columns - minesCount) {
         getElement("mines-count").innerText = "Cleared";
-        gameOver = true;
+        gameState.gameOver = true;
 
         const restartButton = getElement("restart-button");
         restartButton.innerText = "AGAIN";
@@ -190,18 +192,18 @@ function checkTile(r, c) {
     if (r < 0 || r >= rows || c < 0 || c >= columns) {
         return 0;
     }
-    if (minesLocation.includes(r.toString() + "-" + c.toString())) {
+    if (gameState.minesLocation.includes(r.toString() + "-" + c.toString())) {
         return 1;
     }
     return 0;
 }
 
 function resetGame() {
-    board = [];
-    minesLocation = [];
-    tilesClicked = 0;
-    flagEnabled = false;
-    gameOver = false;
+    gameState.board = [];
+    gameState.minesLocation = [];
+    gameState.tilesClicked = 0;
+    gameState.flagEnabled = false;
+    gameState.gameOver = false;
 
     getElement("board").innerHTML = "";
     getElement("flag-button").style.backgroundColor = "lightgray";
