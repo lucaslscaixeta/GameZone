@@ -8,8 +8,10 @@ var flagEnabled = false;
 var gameOver = false;
 
 window.onload = function() {
+    registerEventListeners();
     startGame();
 }
+
 
 function getElement(id) {
     return document.getElementById(id);
@@ -30,13 +32,19 @@ function setMines() {
     }
 }
 
-
 function startGame() {
+    initializeUI();
+    registerEventListeners();
+    initializeBoard();
+}
+
+function initializeUI() {
     getElement("mines-count").innerText = minesCount;
+}
+
+function registerEventListeners() {
     getElement("flag-button").addEventListener("click", setFlag);
     getElement("restart-button").addEventListener("click", resetGame);
-
-    initializeBoard();
 }
 
 function initializeBoard() {
