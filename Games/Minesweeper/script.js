@@ -48,20 +48,25 @@ function registerEventListeners() {
 }
 
 function initializeBoard() {
-
     setMines();
+    createBoardTiles();
+}
 
+function createBoardTiles() {
     for (let r = 0; r < rows; r++) {
-            let row = [];
-            for (let c = 0; c < columns; c++) {
-                let tile = document.createElement("div");
-                tile.id = r.toString() + "-" + c.toString();
-                tile.addEventListener("click", clickTile);
-                getElement("board").append(tile);
-                row.push(tile);
-            }
-            board.push(row);
+        let row = [];
+
+        for (let c = 0; c < columns; c++) {
+            let tile = document.createElement("div");
+            tile.id = r.toString() + "-" + c.toString();
+            tile.addEventListener("click", clickTile);
+
+            getElement("board").append(tile);
+            row.push(tile);
         }
+
+        board.push(row);
+    }
 }
 
 function setFlag() {
