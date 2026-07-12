@@ -22,8 +22,24 @@ function getElement(id) {
 
 function setMines() {
 
+    if (window.Cypress) {
+        gameState.minesLocation = [
+            "0-0",
+            "0-1",
+            "0-2",
+            "0-3",
+            "0-4",
+            "0-5",
+            "0-6",
+            "0-7",
+            "1-0",
+            "1-1"
+        ];
+        return;
+    }
+
     let minesLeft = minesCount;
-    while (minesLeft > 0) { 
+    while (minesLeft > 0) {
         let r = Math.floor(Math.random() * rows);
         let c = Math.floor(Math.random() * columns);
         let id = r.toString() + "-" + c.toString();
