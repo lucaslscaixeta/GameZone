@@ -25,10 +25,13 @@ jobs:
         run: npm install
 
       - name: Instalar servidor HTTP
-        run: npm install -g serve
+        run: npm install -g serve wait-on
 
       - name: Iniciar aplicação
         run: serve . &
+
+      - name: Aguardar servidor iniciar
+        run: npx wait-on http://localhost:3000
 
       - name: Instalar Google Chrome
         uses: browser-actions/setup-chrome@v1
