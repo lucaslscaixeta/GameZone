@@ -28,7 +28,7 @@ jobs:
         run: npm install -g serve wait-on
 
       - name: Iniciar aplicação
-        run: serve . &
+        run: serve . -l 3000 &
 
       - name: Aguardar servidor iniciar
         run: npx wait-on http://localhost:3000
@@ -38,3 +38,5 @@ jobs:
 
       - name: Executar testes Cypress
         run: npx cypress run --browser chrome
+        env:
+          CYPRESS_BASE_URL: http://localhost:3000
