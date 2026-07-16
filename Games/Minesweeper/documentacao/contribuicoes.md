@@ -39,7 +39,7 @@ Este documento sumariza as contribuições realizadas no projeto de código aber
 4. **[PR4 - Testes](https://github.com/lucaslscaixeta/GameZone/pull/3):** Implementação da suíte de testes de aceitação automatizados (cenários BDD e automação via Cypress).
 5. **[PR5 - DevOps](https://github.com/lucaslscaixeta/GameZone/pull/4):** Implementação da esteira de Integração Contínua (CI/CD via GitHub Actions).
 6. **[PR6 - Issue Resolvida (Feature Restart)](https://github.com/kunjgit/GameZone/pull/5259):** Desenvolvimento, integração e estabilização da nova Feature (Botão de Restart) e resolução da issue no repositório original.
-7. **[PR7 - Contribuições]([COLE_O_LINK_DO_PR_AQUI]):** Elaboração deste documento final sumarizando o trabalho, a divisão de tarefas e o mapeamento de todos os PRs do projeto.
+
 
 🌟 **PR Extra - Contribuição para o Projeto Principal:**
 - **[Submissão Oficial GameZone](https://github.com/kunjgit/GameZone/pull/5265):** Pull Request consolidando todo o pacote de trabalho (feature, refatoração, testes e CI) submetido diretamente para o repositório base original `kunjgit/GameZone`.
